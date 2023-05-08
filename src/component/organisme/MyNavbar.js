@@ -1,3 +1,4 @@
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -66,7 +67,7 @@ const MyNavbar = () => {
         <div className="flex items-center justify-between relative">
           <div className="px-4">
             {location === "/" ? (
-              <a href="#home" className="font-bold text-lg text-sky-600 block py-6 lg:py-3">
+              <a href="/" className="font-bold text-lg text-sky-600 block py-6 lg:py-3">
                 <img src={logo} alt="" className="w-16" />
               </a>
             ) : (
@@ -87,7 +88,7 @@ const MyNavbar = () => {
                 <ul className="block lg:flex">
                   <li className="group">
                     <NavLink
-                      to="/indonesia"
+                      to="/"
                       onClick={topFunction}
                       className={({ isActive }) => (isActive ? "text-base  text-sky-600 py-2 mx-6 flex font-bold group-hover:text-primary" : "text-base  text-sky-600 py-2 mx-6 flex group-hover:text-primary ")}
                     >
@@ -105,7 +106,7 @@ const MyNavbar = () => {
                   </li>
                   <li className="group">
                     <NavLink
-                      to="/covid-19"
+                      to="/covid19"
                       onClick={topFunction}
                       className={({ isActive }) => (isActive ? "text-base  text-sky-600 py-2 mx-6 flex font-bold group-hover:text-primary" : "text-base  text-sky-600 py-2 mx-6 flex group-hover:text-primary")}
                     >
