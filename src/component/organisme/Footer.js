@@ -17,9 +17,9 @@ const Footer = () => {
           <div className="mb-12 w-full px-4 font-medium text-slate-500 md:w-1/3">
             <img src={logo} alt="" className="w-28 mb-4 brightness-150 hover:animate-pulse" />
             <h3 className="mb-2 text-2xl text-slate-900 font-bold">RCTN-KS07</h3>
-            <p>Dani Rizky Zaelany - 0</p>
+            <p>Dani Rizky Zaelany - 020</p>
             <p>Laili Cahyani - 007</p>
-            <p>Dika Rahman Rifai - 0</p>
+            <p>Dika Rahman Rifai - 018</p>
           </div>
           <div className="mb-12 w-full px-4 md:w-1/3">
             <h3 className="mb-5 text-xl font-semibold text-slate-900">Resource</h3>
