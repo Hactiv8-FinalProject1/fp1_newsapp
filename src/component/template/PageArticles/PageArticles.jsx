@@ -1,51 +1,55 @@
-import React from "react";
 import moment from "moment";
-import "./pagearticle.css";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import heart from "../../../assets/icons/heart.png";
+import heartFill from "../../../assets/icons/heart-fill.png";
+import { articleSaved, articleUnSaved } from "../../../features/articleSlice";
 
-const PageArticles = ({ data }) => {
+const PageArticles = ({ articleFetch }) => {
+  const saved = useSelector((state) => state.article.entitiesSaved);
+  const dispatch = useDispatch();
+  const isSaved = saved.some((item) => item.title === articleFetch.title);
+
+  const handleSaved = () => {
+    dispatch(articleSaved({ articleFetch }));
+  };
+
+  const handleUnSaved = () => {
+    const filteredUnSave = saved.filter((save) => save.title !== articleFetch.title);
+    dispatch(articleUnSaved({ filteredUnSave }));
+  };
+
+  // component ini akan menampilkan card card sesuai dengan data yang dikirim kedalam component ini
   return (
-    <>
-      {data?.map((property, PageArticles) => {
-        return (
-          /* CARD --*/
-          <div
-            className="rounded-xl shadow-ms shadow-lg border border-sky-900"
-            key={PageArticles}
-          >
-            <div className="p-3 flex-auto flex-col ">
-              <div className="rounded-xl overflow-hidden ">
-                <h2 class="font-bold text-lg mb-2 ">{property.source.name}</h2>
-                <img src={property.urlToImage} alt="" />
-                <p class="text-m ">
-                  {moment(property.publishedAt).format(
-                    "MMMM Do YYYY, h:mm:ss a"
-                  )}
-                </p>
-              </div>
-              <h5 className="text-xl md:text-xl font-small mb-3 mt-3">
-                {property.title}
-              </h5>
-              <p class="text-sm text-gray-600 mb-3">{property.description}</p>
-              <a
-                role="button"
-                href={property.url}
-                class="text-white bg-yellow-500 px-3 py-1 rounded-md hover:bg-purple-700 mr-5"
-              >
-                Learn More
-              </a>
-              <a
-                role="button"
-                href="#"
-                class="text-white bg-yellow-500 px-3 py-1 rounded-md hover:bg-purple-700"
-              >
-                Saved
-              </a>
-            </div>
+    <div className="w-full flex justify-between">
+      <div className="w-full bg-slate-100 rounded-xl shadow-lg overflow-hidden flex flex-col mb-10 relative">
+        <div className="flex-1">
+          <a href={articleFetch.url} className="transition duration-300 hover:brightness-75" target="_blank" rel="noopener noreferrer">
+            <img src={articleFetch.urlToImage} alt={articleFetch.title} className="object-cover w-full h-[12rem]" />
+          </a>
+          <div className="px-7 py-6">
+            <a href={articleFetch.url} className="text-md xl:text-xl font-bold mb-3 transition duration-200 hover:text-secondary" target="_blank" rel="noopener noreferrer">
+              {articleFetch.title}
+            </a>
           </div>
-          /* CARD --*/
-        );
-      })}
-    </>
+        </div>
+        <div className="flex px-7 py-6">
+          <div className="w-full flex items-center">
+            <img src="https://cdn-icons-png.flaticon.com/512/2838/2838779.png" alt="" className="w-5 opacity-75 grayscale" />
+            <span className="text-xs ml-3 opacity-75 grayscale">{moment(articleFetch.publishedAt).format('MMMM Do YYYY, h:mm:ss a')}</span>
+          </div>
+        </div>
+        {!isSaved ? (
+          <button className="absolute py-2 px-2 bg-secondary opacity-30 rounded-full top-3 right-3 transition duration-200 hover:opacity-100" onClick={handleSaved}>
+            <img src={heart} alt="" className="w-5" />
+          </button>
+        ) : (
+          <button className="absolute py-2 px-2 bg-secondary rounded-full top-3 right-3 " onClick={handleUnSaved}>
+            <img src={heartFill} alt="" className="w-5" />
+          </button>
+        )}
+      </div>
+    </div>
   );
 };
 

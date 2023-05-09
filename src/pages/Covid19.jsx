@@ -1,33 +1,43 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCovid19 } from "../features/reduser/covid19";
-import PagesArticles from "../component/template/PageArticles/PageArticles";
+import PageArticles from "../component/template/PageArticles/PageArticles";
 import ArticleTitle from "../component/organisme/ArticleTitle";
+import IsPending from "../component/organisme/IsPending";
+import { useLocation } from "react-router-dom";
+import { fetchArticle } from "../features/articleSlice";
 
-
-const Covid19 = (props) => {
+const Covid19 = () => {
+  const fetchStates = useSelector((state) => state.article);
   const dispatch = useDispatch();
-  const { covid19, isLoading } = useSelector((state) => state.covid19);
+  const location = useLocation().pathname.replace("-", " ");
 
   useEffect(() => {
-    dispatch(getCovid19());
-  }, [dispatch]);
+    dispatch(fetchArticle(location));
+  }, [location, dispatch]);
 
   return (
     <>
-      <section id="covid19">
-        {isLoading ? (
-          <h1> loading...</h1>
-          ) : (
-            <>
-            <ArticleTitle data={"Covid-19"} />
-            <div className=" p-4 flex items-center justify-center  ">
-              <div className="grid gap-4 grid-cols- md:grid-cols-2 lg:grid-cols-4">
-                <PagesArticles data={covid19} />
+      <section id="news">
+        <div className="container px-10 xl:px-20">
+          {fetchStates.isFetchPending && <IsPending />}
+          {!fetchStates.isFetchPending &&
+            (fetchStates.entitiesFetch < 1 ? (
+              <div className="min-h-[30rem] flex justify-center items-center">
+                <span className="text-xl capitalize">
+                  Article <span className="font-semibold">{location.substring(1)}</span> not found
+                </span>
               </div>
+            ) : (
+              <ArticleTitle title={location === "/" ? "Covid-19" : location.substring(1)} />
+            ))}
+          {fetchStates.isFetchSuccess && (
+            <div className="grid justify-center md:grid-cols-2 md:gap-8 xl:grid-cols-4">
+              {fetchStates.entitiesFetch.map((articleFetch, index) => (
+                <PageArticles articleFetch={articleFetch} index={index} key={index} />
+              ))}
             </div>
-          </>
-        )}
+          )}
+        </div>
       </section>
     </>
   );
