@@ -17,7 +17,7 @@ const Search = () => {
         <h1> loading...</h1>
       ) : (
         <>
-          <ArticleTitle data={search} />
+          <ArticleTitle title={search} />
           <div className=" p-4 flex items-center justify-center  ">
             {result.length === 0 ? (
               <div className="text-gray-950 w-">
@@ -28,7 +28,7 @@ const Search = () => {
               </div>
             ) : (
               <div className="grid gap-4 grid-cols- md:grid-cols-2 lg:grid-cols-4">
-                <PagesArticles data={result} />
+                <PagesArticles title={result} />
               </div>
             )}
           </div>

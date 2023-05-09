@@ -4,7 +4,7 @@ import axios from "axios";
 const initialState = {
   search: "",
   result: [],
-  isLoading: false,
+  isFetchPending: false,
 };
 
 const searchSlice = createSlice({
@@ -18,15 +18,15 @@ const searchSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getSeacrh.pending, (state, action) => {
-        state.isLoading = true;
+        state.isFetchPending  = true;
       })
       .addCase(getSeacrh.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isFetchPending = false;
         state.result = action.payload;
         // console.log(action.payload);
       })
       .addCase(getSeacrh.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isFetchPending = false;
         console.log("error", action.error.message);
       });
   },
