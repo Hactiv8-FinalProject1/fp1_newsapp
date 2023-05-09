@@ -1,20 +1,23 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import PagesArticles from "../component/template/PageArticles/PageArticles";
 import ArticleTitle from "../component/organisme/ArticleTitle";
 import { getSeacrh } from "../features/reduser/searchSlice";
+import PageArticles from "../component/template/PageArticles/PageArticles";
+import IsPending from "../component/organisme/IsPending";
 
 const Search = () => {
   const dispatch = useDispatch();
-  const { search, result, isLoading } = useSelector((state) => state.search);
+  const { search, result, isFetchPending } = useSelector(
+    (state) => state.search
+  );
 
   useEffect(() => {
     dispatch(getSeacrh(search));
   }, [dispatch, search]);
   return (
     <section id="search">
-      {isLoading ? (
-        <h1> loading...</h1>
+      {isFetchPending ? (
+        <IsPending />
       ) : (
         <>
           <ArticleTitle title={search} />
@@ -28,7 +31,13 @@ const Search = () => {
               </div>
             ) : (
               <div className="grid gap-4 grid-cols- md:grid-cols-2 lg:grid-cols-4">
-                <PagesArticles title={result} />
+                {result.map((articleFetch, index) => (
+                  <PageArticles
+                    articleFetch={articleFetch}
+                    index={index}
+                    key={index}
+                  />
+                ))}
               </div>
             )}
           </div>
