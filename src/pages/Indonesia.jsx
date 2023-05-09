@@ -17,8 +17,8 @@ const Indonesia = (props) => {
       <section id="indonesia">
         {isLoading ? (
           <h1> loading...</h1>
-          ) : (
-            <>
+        ) : (
+          <>
             <ArticleTitle data={"Indonesia"} />
             <div className=" p-4 flex items-center justify-center  ">
               <div className="grid gap-4 grid-cols- md:grid-cols-2 lg:grid-cols-4">
