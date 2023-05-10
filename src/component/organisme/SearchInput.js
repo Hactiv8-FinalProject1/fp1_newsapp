@@ -10,7 +10,7 @@ const SearchInput = () => {
   const navigate = useNavigate();
 
   const searchChange = (e) => {
-    setSearchInput(e.target.value.replace(" ", "-"));
+    setSearchInput(e.target.value.replace("/", " "));
     console.log(searchInput);
   };
 
