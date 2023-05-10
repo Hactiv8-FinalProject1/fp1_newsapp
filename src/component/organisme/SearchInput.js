@@ -17,7 +17,7 @@ const SearchInput = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(setSearch(searchInput));
-    navigate(`/search${searchInput}`);
+    navigate(`/search/${searchInput}`);
   };
   return (
     <form onSubmit={handleSubmit} className="mx-6 flex">

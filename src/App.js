@@ -7,14 +7,13 @@ import Covid19 from "./pages/Covid19";
 import Indonesia from "./pages/Indonesia";
 import Programming from "./pages/Programming";
 import Search from "./pages/Seacrh";
-import { useSelector } from "react-redux";
-
+// import { useSelector } from "react-redux";
 
 function App() {
   const env = process.env.REACT_APP_BASE_URL;
   console.log(env);
 
-  const { search } = useSelector((state) => state.search);
+  // const { search } = useSelector((state) => state.search);
   return (
     <div className="App">
       <div className="">
@@ -23,7 +22,7 @@ function App() {
           <Route path="/" element={<Indonesia />} />
           <Route path="/covid19" element={<Covid19 />} />
           <Route path="/programming" element={<Programming />} />
-          <Route path={"/search" + search} element={<Search />} />
+          <Route path={"/search/:search"} element={<Search />} />
           <Route path="saved" element={<ArticleSaved />} />
         </Routes>
         <ToTop />
