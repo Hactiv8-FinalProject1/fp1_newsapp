@@ -24,16 +24,24 @@ const Indonesia = () => {
             (fetchStates.entitiesFetch < 1 ? (
               <div className="min-h-[30rem] flex justify-center items-center">
                 <span className="text-xl capitalize">
-                  Article <span className="font-semibold">{location.substring(1)}</span> not found
+                  Article{" "}
+                  <span className="font-semibold">{location.substring(1)}</span>{" "}
+                  not found
                 </span>
               </div>
             ) : (
-              <ArticleTitle title={location === "/" ? "Indonesia" : location.substring(1)} />
+              <ArticleTitle
+                title={location === "/" ? "Indonesia" : location.substring(1)}
+              />
             ))}
           {fetchStates.isFetchSuccess && (
             <div className="grid justify-center md:grid-cols-2 md:gap-8 xl:grid-cols-4">
               {fetchStates.entitiesFetch.map((articleFetch, index) => (
-                <PageArticles articleFetch={articleFetch} index={index} key={index} />
+                <PageArticles
+                  articleFetch={articleFetch}
+                  index={index}
+                  key={index}
+                />
               ))}
             </div>
           )}
