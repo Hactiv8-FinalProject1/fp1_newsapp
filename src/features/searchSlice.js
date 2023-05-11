@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  search: "",
   result: [],
   isFetchPending: false,
 };
@@ -10,15 +9,11 @@ const initialState = {
 const searchSlice = createSlice({
   name: "search",
   initialState,
-  reducers: {
-    setSearch: (state, action) => {
-      state.search = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getSeacrh.pending, (state, action) => {
-        state.isFetchPending  = true;
+        state.isFetchPending = true;
       })
       .addCase(getSeacrh.fulfilled, (state, action) => {
         state.isFetchPending = false;

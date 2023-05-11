@@ -7,13 +7,11 @@ import Covid19 from "./pages/Covid19";
 import Indonesia from "./pages/Indonesia";
 import Programming from "./pages/Programming";
 import Search from "./pages/Seacrh";
-// import { useSelector } from "react-redux";
 
 function App() {
   const env = process.env.REACT_APP_BASE_URL;
   console.log(env);
 
-  // const { search } = useSelector((state) => state.search);
   return (
     <div className="App">
       <div className="">
