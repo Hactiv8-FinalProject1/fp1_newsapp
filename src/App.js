@@ -9,8 +9,6 @@ import Programming from "./pages/Programming";
 import Search from "./pages/Seacrh";
 
 function App() {
-  const env = process.env.REACT_APP_BASE_URL;
-  console.log(env);
 
   return (
     <div className="App">
